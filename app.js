@@ -6,6 +6,7 @@ require("dotenv").config();
 
 
 const indexRouter = require("./routes/indexRouter");
+const newRouter = require("./routes/newRouter");
 
 //For EJS (HTML)
 const path = require("node:path");
@@ -18,6 +19,9 @@ app.set("view engine", "ejs");
 const assetsPath = path.join(__dirname, "public");
 app.use(express.static(assetsPath));
 
+//For forms
+app.use(express.urlencoded({ extended: true }));
+
 
 
 
@@ -28,6 +32,7 @@ const PORT = process.env.NODE_ENV === "prod" ? process.env.PORT : 8080;
 
 
 app.use("/",indexRouter);
+app.use("/new",newRouter);
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
